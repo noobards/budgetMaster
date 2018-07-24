@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+    <head>    
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap-datepicker.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+
+        <title>Hello World</title>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    </head>
+    <body>        
+        <header>                        
+            <div class="clearfix">
+                <i class="fa fa-navicon cursor fa-2x visible-xs pull-left">&nbsp;</i>
+                <ul class="hidden-xs pull-left top-navigation">
+                    <li><a href="#"><i class="fa fa-home">&nbsp;</i>Home</a></li>
+                    <li><a class="top-nav-active" href="index.html"><i class="fa fa-inr">&nbsp;</i>Expense</a></li>
+                    <li><a href="#"><i class="fa fa-pie-chart">&nbsp;</i>Reports</a></li>
+                </ul>
+                <a class="pull-right logout-icon" href="javascript:void(0);"><i class="fa fa-power-off cursor fa-2x">&nbsp;</i></a>
+            </div>                        
+        </header>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">            
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4">
+                              <div class="form-horizontal">
+                                  <div class="form-group">
+                                      <label class="control-label col-md-3" for="date">Date</label>
+                                      <div class="col-md-9">
+                                          <input type="text" id="date" class="form-control datepicker" placeholder="Select a date" />
+                                      </div>
+                                  </div>
+                              </div>
+                        </div>
+                        <div class="col-md-4"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-right">
+                            <button id="addNewRow" class="btn btn-default btn-xs"><i class="fa fa-plus">&nbsp;</i>New Row</button>
+                        </div>
+                    </div>
+                    <table class="table table-condensed table-striped" id="expenseTable">
+                        <thead>
+                            <tr>
+                                <th>Commodity</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="text" class="form-control" name="item[]" /></td>
+                                <td>
+                                    <select class="form-control" id="category-select" name="category[]">
+                                        <option value="">--Select One--</option>                                        
+                                        <option value="1">Entertainment</option>
+                                        <option value="2">Essentials</option>
+                                        <option value="3">Food</option>
+                                        <option value="4">Miscellaneous</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="number" class="form-control" name="price[]" />
+                                </td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <button class="btn btn-primary"><i class="fa fa-send">&nbsp;</i>Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+        </div> <!-- .container-fluid -->
+        <footer></footer>
+        
+        <script type="text/javascript" src="js/functions.js"></script>
+        <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
+        <script type="text/javascript">        
+            jQuery('.datepicker').datepicker({ format: 'yyyy-mm-dd', autoclose: true });
+            
+            jQuery('#addNewRow').on('click', function(e){
+               var fields = [
+                   {type:'text', name:'item[]'},
+                   {type:'menu', name:'category[]', options:getMenuOptions('#category-select')},
+                   {type:'number', name:'price[]'},
+                   {type:'remove'}
+               ];
+               
+               if(fields.length > 0)
+               {
+                    var tr = document.createElement("tr");
+                    for(var i = 0; i < fields.length; i++)
+                    {                        
+                        tr.appendChild(buildElement(fields[i]));
+                    }                   
+                    document.getElementById("expenseTable").tBodies[0].appendChild(tr);
+               }
+                              
+            });
+            
+            jQuery('#expenseTable').on('click', '.fa-close.cursor', function(e){
+                jQuery(this).closest('tr').remove();
+            });
+        </script>
+    </body>
+</html>
