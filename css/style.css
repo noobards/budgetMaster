@@ -1,0 +1,17 @@
+.cursor{ cursor: pointer; }
+.logout-icon{ display: block; }
+.logout-icon > i, .fa-navicon{ line-height: 45px; }
+.fa-navicon { margin-left: 10px; }
+
+
+header{ background-color: #f0f0f0; margin-bottom: 10px; box-shadow: 0 0 1px 0 rgba(0,0,0,0.3); }
+
+/*
+    TOP NAVIGATION
+*/
+.top-navigation{ list-style: none; height: 45px; padding: 0 10px; margin: 0; }
+.top-navigation li{ display: inline-block; line-height: 45px; margin: 0; margin-left: -4px; }
+.top-navigation li:first-child{ margin-left: 0; }
+.top-navigation li a{ display: block; font-weight: bold; padding: 0 10px; }
+.top-navigation li a:hover{ text-decoration: none; background-color: #bdbbbb; color: #fff; }
+.top-navigation li a.top-nav-active{ background-color: #337ab7; color: #fff; }
