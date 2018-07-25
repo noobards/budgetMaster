@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+    <head>    
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap-datepicker.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+
+        <title>Hello World</title>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        
+        
+    </head>
+    <body>        
+        <header>                        
+            <div class="clearfix">
+                <i class="fa fa-navicon cursor fa-2x visible-xs pull-left">&nbsp;</i>
+                <ul class="hidden-xs pull-left top-navigation">
+                    <li><a class="top-nav-active" href="home.html"><i class="fa fa-home">&nbsp;</i>Home</a></li>
+                    <li><a href="new.html"><i class="fa fa-inr">&nbsp;</i>Expense</a></li>
+                    <li><a href="#"><i class="fa fa-pie-chart">&nbsp;</i>Reports</a></li>
+                </ul>
+                <a class="pull-right logout-icon" href="javascript:void(0);"><i class="fa fa-power-off cursor fa-2x">&nbsp;</i></a>
+            </div>                        
+        </header>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <style type="text/css">
+                        #chart_div{
+                            height: 400px;
+                        }
+                    </style>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="home-stat-box">
+                                <h3><i class="fa fa-inr">&nbsp;</i>14,233</h3>
+                                <p>spent so far</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="home-stat-box">
+                                <h3><i class="fa fa-inr">&nbsp;</i>533</h3>
+                                <p>avg per day</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="home-stat-box">
+                                <h3><i class="fa fa-inr">&nbsp;</i>19,438</h3>
+                                <p>month projection</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive mt-10">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr class="bg-primary">
+                                    <th style="width:33%;"><i title="Previous day" class="fa fa-caret-left cursor fa-prev-date fa-2x changeDate">&nbsp;</i></th>
+                                    <th style="width:34%;" class="text-center" id="dt_string">July 25, 2018</th>
+                                    <th style="width:33%;" class="text-right"><i title="Next day" class="fa fa-caret-right cursor fa-next-date fa-2x changeDate">&nbsp;</i></th>
+                                </tr>
+                                <tr class="bg-warning">
+                                    <th colspan="2">Item</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="2">BF</td>
+                                    <td><i class="fa fa-inr">&nbsp;</i>30</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">Lunch</td>
+                                    <td><i class="fa fa-inr">&nbsp;</i>50</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">Dinner</td>
+                                    <td><i class="fa fa-inr">&nbsp;</i>250</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">Heater</td>
+                                    <td><i class="fa fa-inr">&nbsp;</i>500</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">Phone</td>
+                                    <td><i class="fa fa-inr">&nbsp;</i>800</td>
+                                </tr>
+                                <!--
+                                <tr>
+                                    <td colspan="3" class="text-center">No records found.</td>
+                                </tr>
+                                -->
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="2" class="text-right"><strong>Total:</strong></td>
+                                    <td><strong><i class="fa fa-inr">&nbsp;</i>1630</strong></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <div id="chart_div"></div>
+                </div>
+            </div>            
+        </div> <!-- .container-fluid -->
+        <footer></footer>
+        
+        <script type="text/javascript" src="js/functions.js"></script>
+        <script type="text/javascript">        
+            google.charts.load('current', {packages: ['corechart', 'line']});
+            google.charts.setOnLoadCallback(drawCurveTypes);
+            
+            function drawCurveTypes() {
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Date');
+                data.addColumn('number', 'Day Total');
+                
+
+                data.addRows([
+                  ['Jul 16', 321],    ['Jul 17', 1204],   ['Jul 18', 155],  ['Jul 19', 80],   ['Jul 20', 442],  ['Jul 21', 235],
+                  ['Jul 22', 120],   ['Jul 23', 580],  ['Jul 24', 100],  ['Jul 25', 1630]
+                ]);
+
+                var options = {
+                  hAxis: {
+                    title: 'Day'
+                  },
+                  vAxis: {
+                    title: 'Rupees'
+                  },
+                  series: {
+                    1: {curveType: 'function'}
+                  }
+                };
+
+                var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+                chart.draw(data, options);
+            }
+            
+            jQuery('.changeDate').on('click', function(){
+                var dt_string = jQuery.trim(jQuery('#dt_string').text());
+                var operator = "";
+                if(jQuery(this).hasClass('fa-prev-date'))
+                {
+                    operator = "+";
+                }
+                else if(jQuery(this).hasClass('fa-next-date'))
+                {
+                    operator = "-";
+                }
+                
+                if(operator !== "")
+                {
+                    makeAjax("ajax/home_moveDate.php", {dt:dt_string, dir:operator}, "changeDateSuccess");
+                }                
+            });
+            
+            function changeDateSuccess(res)
+            {
+                console.log(res);
+            }
+            
+        </script>
+    </body>
+</html>
