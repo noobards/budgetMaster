@@ -97,3 +97,28 @@ function getMenuOptions(selector)
     }
     return options;
 }
+
+function makeAjax(endpoint, formdata, successHandler, errorHandler)
+{    
+    jQuery.ajax({
+       type:'post',
+       url:endpoint,
+       dataType:'json',
+       data:formdata,
+       success:function(response)
+       {
+           window[successHandler](response);
+       },
+       error:function(x,m,t)
+       {
+           if(errorHandler)
+           {
+               window[errorHandler](t);
+           }
+           else
+           {
+               alert("Ajax error from "+endpoint+": "+t);
+           }
+       }
+    });
+}
